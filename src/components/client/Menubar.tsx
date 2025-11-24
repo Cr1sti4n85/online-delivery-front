@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { assets } from "../../assets/assets";
 
 const Menubar = () => {
@@ -25,19 +26,21 @@ const Menubar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/">
                 Home
-              </a>
+              </Link>
             </li>
+
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/explore">
                 Explorar
-              </a>
+              </Link>
             </li>
+
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <Link className="nav-link" to="/contact">
                 Contacto
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="d-flex align-items-center menubar-right gap-4">

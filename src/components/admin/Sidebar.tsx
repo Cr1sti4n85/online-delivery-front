@@ -17,19 +17,19 @@ const Sidebar = ({ visibleSidebar }: SidebarProps) => {
       <div className="list-group list-group-flush">
         <Link
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          to={"/add"}
+          to={"/admin/add"}
         >
           <i className="bi bi-plus-circle me-2"></i> Agregar comida
         </Link>
         <Link
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          to={"/list"}
+          to={"/admin/list"}
         >
           <i className="bi bi-list-ul me-2"></i> Ver comidas
         </Link>
         <Link
           className="list-group-item list-group-item-action list-group-item-light p-3"
-          to={"/orders"}
+          to={"/admin/orders"}
         >
           <i className="bi bi-cart me-2"></i> Órdenes
         </Link>

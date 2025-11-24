@@ -6,19 +6,21 @@ import AdminMenubar from "./components/admin/AdminMenubar";
 import Sidebar from "./components/admin/Sidebar";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import AdminRoute from "./components/AdminRoute";
 import Menubar from "./components/client/Menubar";
+import Home from "./pages/Client/Home";
+import Explore from "./pages/Client/Explore";
+import Contact from "./pages/Client/Contact";
 
 const App = () => {
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
-
+  const isAdmin = false;
   const toggleSidebar = () => {
     setVisibleSidebar(!visibleSidebar);
   };
 
   return (
     <>
-      <AdminRoute>
+      {isAdmin ? (
         <div className="d-flex" id="wrapper">
           <Sidebar visibleSidebar={visibleSidebar} />
           <div id="page-content-wrapper">
@@ -29,16 +31,21 @@ const App = () => {
                 <Route path="/admin/add" element={<AddFood />} />
                 <Route path="/admin/list" element={<ListFoods />} />
                 <Route path="/admin/orders" element={<Orders />} />
-                <Route path="/admin" element={<ListFoods />} />
+                <Route path="/" element={<ListFoods />} />
               </Routes>
             </div>
           </div>
         </div>
-      </AdminRoute>
-
-      <div className="d-flex flex-column">
-        <Menubar />
-      </div>
+      ) : (
+        <div className="d-flex flex-column">
+          <Menubar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/explore" element={<Explore />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </div>
+      )}
     </>
   );
 };

@@ -1,0 +1,57 @@
+import { useRef } from "react";
+import { categories } from "../../assets/assets";
+
+const ExploreMenu = () => {
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    if (menuRef.current) {
+      menuRef.current.scrollBy({ left: -200, behavior: "smooth" });
+    }
+  };
+
+  const scrollRight = () => {
+    if (menuRef.current) {
+      menuRef.current.scrollBy({ left: 200, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <div className="explore-menu position-relative">
+      <h1 className="d-flex align-items-center justify-content-between">
+        Explora nuestro menú
+        <div className="d-flex">
+          <i
+            className="bi bi-arrow-left-circle scroll-icon"
+            onClick={scrollLeft}
+          ></i>
+          <i
+            className="bi bi-arrow-right-circle scroll-icon"
+            onClick={scrollRight}
+          ></i>
+        </div>
+      </h1>
+      <p>Explora nuestra lista seleccionada de platos</p>
+      <div
+        className="d-flex justify-content-between gap-4 overflow-auto explore-menu-list"
+        ref={menuRef}
+      >
+        {categories.map((item, idx) => (
+          <div key={idx} className="explore-menu-list-item text-center">
+            <img
+              src={item.image}
+              alt={item.category}
+              className="rounded-circle img-fluid"
+              width={128}
+              height={128}
+            />
+            <p className="mt-2 fw-bold">{item.category}</p>
+          </div>
+        ))}
+      </div>
+      <hr />
+    </div>
+  );
+};
+
+export default ExploreMenu;
