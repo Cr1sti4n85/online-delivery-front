@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import type { FoodData } from "../types";
 import { addFood } from "../http/apiRequests";
+import { toast } from "react-toastify";
 
 const AddFood = () => {
   const [image, setImage] = useState<File | null>(null);
@@ -32,18 +33,14 @@ const AddFood = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!image) {
-      alert("Por favor, selecciona una imagen.");
+      toast.error("Por favor, selecciona una imagen.");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("food", JSON.stringify(foodData));
-    formData.append("file", image);
-
     try {
-      const res = await addFood(formData);
+      const res = await addFood(foodData, image);
       if (res.status === 201) {
-        alert("Comida agregada exitosamente.");
+        toast.success("Comida agregada con éxito!");
         setFoodData({
           name: "",
           price: 0,
@@ -53,7 +50,7 @@ const AddFood = () => {
         setImage(null);
       }
     } catch (error: unknown) {
-      alert("Error al agregar la comida.");
+      toast.error("Error al agregar la comida.");
       console.log(error);
     }
   };
@@ -75,6 +72,7 @@ const AddFood = () => {
                   id="name"
                   required
                   name="name"
+                  placeholder="Ingresa el nombre"
                   onChange={handleDataChange}
                   value={foodData.name}
                 />
@@ -122,6 +120,7 @@ const AddFood = () => {
                   id="description"
                   rows={5}
                   required
+                  placeholder="Ingresa la descripción"
                   name="description"
                   onChange={handleDataChange}
                   value={foodData.description}
@@ -139,7 +138,7 @@ const AddFood = () => {
                   type="file"
                   className="form-control"
                   id="image"
-                  required
+                  name={image ? image.name : "image"}
                   hidden
                   onChange={handleImageChange}
                 />
