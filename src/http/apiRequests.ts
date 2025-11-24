@@ -18,5 +18,5 @@ export const getFoods = async () => {
 
 export const deleteFood = async (id: number) => {
   const response = await API.delete(`/foods/${id}`);
-  return response;
+  return response.status === 204;
 };

@@ -8,7 +8,7 @@ const ListFoods = () => {
 
   const removeFood = async (id: number) => {
     const res = await deleteFood(id);
-    if (res.status === 204) {
+    if (res) {
       toast.success("Comida eliminada con éxito");
       setList((prev) => prev.filter((food) => food.id !== id));
     } else {

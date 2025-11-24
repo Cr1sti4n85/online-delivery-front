@@ -2,7 +2,7 @@ type MenuProps = {
   toggleSidebar: () => void;
 };
 
-const Menubar = ({ toggleSidebar }: MenuProps) => {
+const AdminMenubar = ({ toggleSidebar }: MenuProps) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light border-bottom">
       <div className="container-fluid">
@@ -29,4 +29,4 @@ const Menubar = ({ toggleSidebar }: MenuProps) => {
   );
 };
 
-export default Menubar;
+export default AdminMenubar;

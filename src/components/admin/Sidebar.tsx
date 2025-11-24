@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { assets } from "../assets/assets";
+import { assets } from "../../assets/assets";
 
 type SidebarProps = {
   visibleSidebar: boolean;
