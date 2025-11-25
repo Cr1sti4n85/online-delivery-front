@@ -41,7 +41,7 @@ const ExploreMenu = () => {
             <img
               src={item.image}
               alt={item.category}
-              className="rounded-circle img-fluid"
+              className="rounded-circle "
               width={128}
               height={128}
             />

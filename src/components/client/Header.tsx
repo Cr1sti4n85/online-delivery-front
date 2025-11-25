@@ -6,7 +6,7 @@ const Header = () => {
       <div className="container-fuid py-5">
         <h1 className="display-5 fw-bold">Pide tu plato favorito aquí</h1>
         <p className="col-md-8 fs-4">Descubre las mejores comidas y tragos</p>
-        <Link to="/explore" className="btn btn-primary btn-lg">
+        <Link to="/explore" className="btn btn-primary">
           Explorar
         </Link>
       </div>
