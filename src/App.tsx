@@ -10,6 +10,7 @@ import Menubar from "./components/client/Menubar";
 import Home from "./pages/Client/Home";
 import Explore from "./pages/Client/Explore";
 import Contact from "./pages/Client/Contact";
+import FoodDetails from "./pages/Client/FoodDetails";
 
 const App = () => {
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
@@ -43,6 +44,7 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/food/:id" element={<FoodDetails />} />
           </Routes>
         </div>
       )}

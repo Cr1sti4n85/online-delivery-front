@@ -16,6 +16,11 @@ export const getFoods = async () => {
   return response;
 };
 
+export const getSingleFood = async (id: string) => {
+  const response = await API.get<FoodResponse>(`/foods/${id}`);
+  return response;
+};
+
 export const deleteFood = async (id: number) => {
   const response = await API.delete(`/foods/${id}`);
   return response.status === 204;
