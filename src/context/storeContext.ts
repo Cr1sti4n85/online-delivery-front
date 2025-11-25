@@ -1,9 +1,9 @@
 import { createContext } from "react";
 import type { FoodResponse } from "../types";
 
-export interface StoreContextType {
+export type StoreContextType = {
   foodList: FoodResponse[];
-}
+};
 
 export const StoreContext = createContext<StoreContextType | null>({
   foodList: [],
