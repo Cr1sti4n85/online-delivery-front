@@ -14,7 +14,7 @@ import FoodDetails from "./pages/Client/FoodDetails";
 
 const App = () => {
   const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
-  const isAdmin = false;
+  const isAdmin = true;
   const toggleSidebar = () => {
     setVisibleSidebar(!visibleSidebar);
   };
