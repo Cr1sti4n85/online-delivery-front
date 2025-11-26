@@ -6,6 +6,7 @@ import burgerCategory from "./burger-cat.jpg";
 import sushiCategory from "./sushi-cat.jpg";
 import dessertCategory from "./dessert-cat.jpg";
 import saladCategory from "./salad-cat.jpg";
+import { FoodCategory } from "../types.d";
 
 export const assets = {
   logo,
@@ -15,23 +16,23 @@ export const assets = {
 
 export const categories = [
   {
-    category: "Pizzas",
+    category: FoodCategory.Pizzas,
     image: pizzaCategory,
   },
   {
-    category: "Hambuerguesas",
+    category: FoodCategory.Burgers,
     image: burgerCategory,
   },
   {
-    category: "Sushi",
+    category: FoodCategory.Sushi,
     image: sushiCategory,
   },
   {
-    category: "Postres",
+    category: FoodCategory.Desserts,
     image: dessertCategory,
   },
   {
-    category: "Ensaladas",
+    category: FoodCategory.Salads,
     image: saladCategory,
   },
 ];

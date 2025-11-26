@@ -1,7 +1,13 @@
 import { useRef } from "react";
 import { categories } from "../../assets/assets";
+import { FoodCategory } from "../../types.d";
 
-const ExploreMenu = () => {
+type ExploreMenuProps = {
+  category: FoodCategory;
+  setCategory: React.Dispatch<React.SetStateAction<FoodCategory>>;
+};
+
+const ExploreMenu = ({ category, setCategory }: ExploreMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   const scrollLeft = () => {
@@ -37,11 +43,23 @@ const ExploreMenu = () => {
         ref={menuRef}
       >
         {categories.map((item, idx) => (
-          <div key={idx} className="explore-menu-list-item text-center">
+          <div
+            key={idx}
+            className="explore-menu-list-item text-center"
+            onClick={() =>
+              setCategory((prev) =>
+                prev === item.category ? FoodCategory.All : item.category
+              )
+            }
+          >
             <img
               src={item.image}
-              alt={item.category}
-              className="rounded-circle "
+              alt={item.category.toString()}
+              className={`${
+                item.category === category
+                  ? "rounded-circle active"
+                  : "rounded-circle"
+              }`}
               width={128}
               height={128}
             />

@@ -12,7 +12,7 @@ import Contact from "./pages/Client/Contact";
 import FoodDetails from "./pages/Client/FoodDetails";
 
 const App = () => {
-  const isAdmin = true;
+  const isAdmin = false;
 
   return (
     <>

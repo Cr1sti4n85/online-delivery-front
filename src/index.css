@@ -88,3 +88,8 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
   background-color: #e2e2e2;
   border: none;
 }
+
+.explore-menu-list-item .active {
+  border: 4px solid #ff6f61;
+  padding: 2px;
+}
