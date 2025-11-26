@@ -6,7 +6,7 @@ export type FoodData = {
 };
 
 export type FoodResponse = {
-  id: number;
+  id: string;
   name: string;
   price: number;
   category: FoodCategory;
@@ -22,3 +22,7 @@ export enum FoodCategory {
   Desserts = "Desserts",
   Salads = "Salads",
 }
+
+export type FoodQuantity = {
+  [foodId: string]: number;
+};
