@@ -1,16 +1,9 @@
 import { Link } from "react-router";
 import { assets } from "../../assets/assets";
 
-type SidebarProps = {
-  visibleSidebar: boolean;
-};
-
-const Sidebar = ({ visibleSidebar }: SidebarProps) => {
+const Sidebar = () => {
   return (
-    <div
-      className={`border-end bg-white ${visibleSidebar ? "" : "d-none"}`}
-      id="sidebar-wrapper"
-    >
+    <div className="border-end bg-white" id="sidebar-wrapper">
       <div className="sidebar-heading border-bottom bg-light">
         <img src={assets.logo} alt="logo" height={48} width={48} />
       </div>

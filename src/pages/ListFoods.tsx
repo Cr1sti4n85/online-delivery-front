@@ -18,15 +18,15 @@ const ListFoods = () => {
 
   useEffect(() => {
     const fetchFoods = async () => {
-      const response = await getFoods();
-      if (response.status === 200) setList(response.data);
-      else toast.error("Error al obtener la lista de comidas");
+      try {
+        const response = await getFoods();
+        if (response.status === 200) setList(response.data);
+      } catch {
+        toast.error("Error al obtener la lista de comidas");
+      }
     };
-    try {
-      fetchFoods();
-    } catch (error) {
-      console.log(error);
-    }
+
+    fetchFoods();
   }, []);
   return (
     <div className="py-5 row justify-content-center">

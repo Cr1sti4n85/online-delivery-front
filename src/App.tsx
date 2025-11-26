@@ -4,7 +4,6 @@ import ListFoods from "./pages/ListFoods";
 import Orders from "./pages/Orders";
 import AdminMenubar from "./components/admin/AdminMenubar";
 import Sidebar from "./components/admin/Sidebar";
-import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Menubar from "./components/client/Menubar";
 import Home from "./pages/Client/Home";
@@ -13,19 +12,15 @@ import Contact from "./pages/Client/Contact";
 import FoodDetails from "./pages/Client/FoodDetails";
 
 const App = () => {
-  const [visibleSidebar, setVisibleSidebar] = useState<boolean>(true);
   const isAdmin = true;
-  const toggleSidebar = () => {
-    setVisibleSidebar(!visibleSidebar);
-  };
 
   return (
     <>
       {isAdmin ? (
         <div className="d-flex" id="wrapper">
-          <Sidebar visibleSidebar={visibleSidebar} />
+          <Sidebar />
           <div id="page-content-wrapper">
-            <AdminMenubar toggleSidebar={toggleSidebar} />
+            <AdminMenubar />
             <ToastContainer />
             <div className="container-fluid">
               <Routes>
