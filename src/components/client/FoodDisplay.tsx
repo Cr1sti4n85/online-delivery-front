@@ -5,14 +5,17 @@ import { FoodCategory } from "../../types.d";
 
 type FoodDisplayProps = {
   category: FoodCategory;
+  searchText: string;
 };
 
-const FoodDisplay = ({ category }: FoodDisplayProps) => {
+const FoodDisplay = ({ category, searchText }: FoodDisplayProps) => {
   const foodList = useContext(StoreContext)?.foodList;
 
   //Filter by category
   const filteredFoods = foodList?.filter(
-    (food) => category === FoodCategory.All || food.category === category
+    (food) =>
+      (category === FoodCategory.All || food.category === category) &&
+      food.name.toLowerCase().includes(searchText?.toLowerCase())
   );
 
   return (

@@ -7,7 +7,7 @@ type FoodItemProps = {
 
 const FoodItem = ({ food }: FoodItemProps) => {
   return (
-    <div className="card" style={{ maxWidth: "320px" }}>
+    <Link to={`food/${food.id}`} className="card" style={{ maxWidth: "320px" }}>
       <img
         src={food.imageUrl}
         className="card-img-top"
@@ -31,14 +31,14 @@ const FoodItem = ({ food }: FoodItemProps) => {
         </div>
       </div>
       <div className="card-footer d-flex justify-content-between bg-light">
-        <Link to={`food/${food.id}`} className="btn btn-primary btn-sm">
+        {/* <Link to={`food/${food.id}`} className="btn btn-primary btn-sm">
           Ver
-        </Link>
+        </Link> */}
         <button className="btn btn-outline-secondary btn-sm">
           <i className="bi bi-heart"></i>
         </button>
       </div>
-    </div>
+    </Link>
   );
 };
 
