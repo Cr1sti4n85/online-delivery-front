@@ -80,7 +80,10 @@ const Cart = () => {
                         $
                         {ctx.quantities && food.price * ctx.quantities[food.id]}
                       </p>
-                      <button className="btn btn-sm btn-outline-danger">
+                      <button
+                        className="btn btn-sm btn-outline-danger"
+                        onClick={() => ctx.removeFromCart(food.id)}
+                      >
                         <i className="bi bi-trash"></i>
                       </button>
                     </div>

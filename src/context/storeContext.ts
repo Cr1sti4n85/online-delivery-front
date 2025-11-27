@@ -6,6 +6,7 @@ export type StoreContextType = {
   increaseQty: (foodId: string) => void;
   decreaseQty: (foodId: string) => void;
   quantities: FoodQuantity | null;
+  removeFromCart: (foodId: string) => void;
 };
 
 export const StoreContext = createContext<StoreContextType | null>(null);

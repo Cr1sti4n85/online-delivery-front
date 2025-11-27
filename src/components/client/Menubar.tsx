@@ -1,7 +1,15 @@
 import { Link } from "react-router";
 import { assets } from "../../assets/assets";
+import { useContext, useState } from "react";
+import { StoreContext } from "../../context/storeContext";
 
 const Menubar = () => {
+  const [active, setActive] = useState("home");
+  const ctx = useContext(StoreContext);
+  const uniqueItemsInCart =
+    ctx?.quantities &&
+    Object.values(ctx.quantities).filter((item) => item > 0).length;
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container">
@@ -28,19 +36,37 @@ const Menubar = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/">
+              <Link
+                className={
+                  active === "home" ? "nav-link fw-bold active" : "nav-link"
+                }
+                to="/"
+                onClick={() => setActive("home")}
+              >
                 Home
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/explore">
+              <Link
+                className={
+                  active === "explore" ? "nav-link fw-bold active" : "nav-link"
+                }
+                to="/explore"
+                onClick={() => setActive("explore")}
+              >
                 Explorar
               </Link>
             </li>
 
             <li className="nav-item">
-              <Link className="nav-link" to="/contact">
+              <Link
+                className={
+                  active === "contact" ? "nav-link fw-bold active" : "nav-link"
+                }
+                to="/contact"
+                onClick={() => setActive("contact")}
+              >
                 Contacto
               </Link>
             </li>
@@ -53,7 +79,7 @@ const Menubar = () => {
                   className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
                   style={{ fontSize: "0.75rem" }}
                 >
-                  3
+                  {uniqueItemsInCart}
                 </span>
               </div>
             </Link>
