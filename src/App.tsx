@@ -10,6 +10,7 @@ import Home from "./pages/Client/Home";
 import Explore from "./pages/Client/Explore";
 import Contact from "./pages/Client/Contact";
 import FoodDetails from "./pages/Client/FoodDetails";
+import Cart from "./pages/Client/Cart";
 
 const App = () => {
   const isAdmin = false;
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/explore" element={<Explore />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/food/:id" element={<FoodDetails />} />
+            <Route path="/cart" element={<Cart />} />
           </Routes>
         </div>
       )}

@@ -17,7 +17,6 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
       })
       //con corchetes foodId toma el valor de la variable como clave
     );
-    console.log(quantities);
   };
 
   const decreaseQty = (foodId: string) => {

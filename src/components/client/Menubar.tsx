@@ -46,15 +46,17 @@ const Menubar = () => {
             </li>
           </ul>
           <div className="d-flex align-items-center menubar-right gap-4">
-            <div className="position-relative">
-              <i className="bi bi-cart4" style={{ fontSize: "1.5rem" }}></i>
-              <span
-                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "0.75rem" }}
-              >
-                3
-              </span>
-            </div>
+            <Link to={"/cart"}>
+              <div className="position-relative">
+                <i className="bi bi-cart4" style={{ fontSize: "1.5rem" }}></i>
+                <span
+                  className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                  style={{ fontSize: "0.75rem" }}
+                >
+                  3
+                </span>
+              </div>
+            </Link>
             <button className="btn btn-outline-primary">Login</button>
             <button className="btn btn-outline-success">Registro</button>
           </div>
