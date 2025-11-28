@@ -1,10 +1,11 @@
 import { useContext } from "react";
 import { StoreContext } from "../../context/storeContext";
 import type { FoodResponse } from "../../types";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const Cart = () => {
   const ctx = useContext(StoreContext);
+  const navigate = useNavigate();
   if (!ctx) return null;
 
   //CartItems
@@ -125,6 +126,7 @@ const Cart = () => {
               <button
                 className="btn btn-primary w-100"
                 disabled={cartItems.length === 0}
+                onClick={() => navigate("/order")}
               >
                 Continuar
               </button>

@@ -11,6 +11,7 @@ import Explore from "./pages/Client/Explore";
 import Contact from "./pages/Client/Contact";
 import FoodDetails from "./pages/Client/FoodDetails";
 import Cart from "./pages/Client/Cart";
+import PlaceOrder from "./pages/Client/PlaceOrder";
 
 const App = () => {
   const isAdmin = false;
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/food/:id" element={<FoodDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/order" element={<PlaceOrder />} />
           </Routes>
         </div>
       )}
