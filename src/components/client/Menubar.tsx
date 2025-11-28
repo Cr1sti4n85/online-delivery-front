@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { assets } from "../../assets/assets";
 import { useContext, useState } from "react";
 import { StoreContext } from "../../context/storeContext";
@@ -6,6 +6,8 @@ import { StoreContext } from "../../context/storeContext";
 const Menubar = () => {
   const [active, setActive] = useState("home");
   const ctx = useContext(StoreContext);
+  const navigate = useNavigate();
+
   const uniqueItemsInCart =
     ctx?.quantities &&
     Object.values(ctx.quantities).filter((item) => item > 0).length;
@@ -83,8 +85,18 @@ const Menubar = () => {
                 </span>
               </div>
             </Link>
-            <button className="btn btn-outline-primary">Login</button>
-            <button className="btn btn-outline-success">Registro</button>
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => navigate("/login")}
+            >
+              Login
+            </button>
+            <button
+              className="btn btn-outline-success"
+              onClick={() => navigate("/register")}
+            >
+              Registro
+            </button>
           </div>
         </div>
       </div>

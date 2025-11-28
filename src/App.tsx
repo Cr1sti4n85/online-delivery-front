@@ -12,6 +12,8 @@ import Contact from "./pages/Client/Contact";
 import FoodDetails from "./pages/Client/FoodDetails";
 import Cart from "./pages/Client/Cart";
 import PlaceOrder from "./pages/Client/PlaceOrder";
+import Login from "./pages/Client/Login";
+import Register from "./pages/Client/Register";
 
 const App = () => {
   const isAdmin = false;
@@ -44,6 +46,8 @@ const App = () => {
             <Route path="/food/:id" element={<FoodDetails />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/order" element={<PlaceOrder />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </div>
       )}

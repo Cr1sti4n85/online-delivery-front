@@ -134,3 +134,17 @@ li .active {
   background-color: #e2e2e2;
   border: none;
 }
+
+/*LOGIN AND REGISTER PAGES*/
+
+.login-container,
+.register-container {
+  background-image: url("./assets/bg-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: calc(100vh - 64px);
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
