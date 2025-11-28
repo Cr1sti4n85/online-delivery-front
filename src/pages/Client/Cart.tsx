@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { StoreContext } from "../../context/storeContext";
 import type { FoodResponse } from "../../types";
 import { Link, useNavigate } from "react-router";
+import { calculateCartCosts } from "../../util/cartUtils";
 
 const Cart = () => {
   const ctx = useContext(StoreContext);
@@ -13,16 +14,7 @@ const Cart = () => {
     (food) => ctx.quantities && ctx?.quantities[food.id] > 0
   );
 
-  //calculating sub-total from cart items
-  const subTotal: number = cartItems.reduce(
-    (acc, food) =>
-      ctx.quantities ? acc + food.price * ctx.quantities[food.id] : 0,
-    0
-  );
-
-  const delivery = subTotal === 0 ? 0 : 1500;
-  const tax = subTotal * 0.19;
-  const total = subTotal + delivery + tax;
+  const { subTotal, delivery, tax, total } = calculateCartCosts(cartItems, ctx);
 
   return (
     <div className="container py-5">

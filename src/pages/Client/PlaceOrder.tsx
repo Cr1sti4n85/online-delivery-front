@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/storeContext";
 import type { FoodResponse } from "../../types";
+import { calculateCartCosts } from "../../util/cartUtils";
 
 const PlaceOrder = () => {
   const ctx = useContext(StoreContext);
@@ -13,16 +14,7 @@ const PlaceOrder = () => {
     (food) => ctx.quantities && ctx?.quantities[food.id] > 0
   );
 
-  //calculating sub-total from cart items
-  const subTotal: number = cartItems.reduce(
-    (acc, food) =>
-      ctx.quantities ? acc + food.price * ctx.quantities[food.id] : 0,
-    0
-  );
-
-  const delivery = subTotal === 0 ? 0 : 1500;
-  const tax = subTotal * 0.19;
-  const total = subTotal + delivery + tax;
+  const { delivery, tax, total } = calculateCartCosts(cartItems, ctx);
 
   return (
     <div className="container mt-4">

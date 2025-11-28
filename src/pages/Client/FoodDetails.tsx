@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router";
 import { getSingleFood } from "../../http/apiRequests";
 import { toast } from "react-toastify";
 import type { FoodResponse } from "../../types";
+import { StoreContext } from "../../context/storeContext";
 
 const FoodDetails = () => {
   const { id } = useParams<{ id: string }>();
   const [data, setdata] = useState<FoodResponse | null>(null);
+  const increaseQty = useContext(StoreContext)?.increaseQty;
+  const navigate = useNavigate();
+
+  const addToCart = () => {
+    if (data && increaseQty) {
+      increaseQty(data.id);
+      navigate("/cart");
+    }
+  };
 
   useEffect(() => {
     const fetchFoodDetails = async (foodId: string) => {
@@ -45,6 +55,7 @@ const FoodDetails = () => {
               <button
                 className="btn btn-outline-dark flex-shrink-0"
                 type="button"
+                onClick={addToCart}
               >
                 <i className="bi-cart-fill me-1"></i>
                 Añadir

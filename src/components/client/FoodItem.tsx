@@ -13,7 +13,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
   return (
     <div className="col-12 col-sm-6 col-md-4 col-lg3 d-flex justify-content-center">
       <div className="card text-decoration-none" style={{ maxWidth: "320px" }}>
-        <Link to={`food/${food.id}`}>
+        <Link to={`/food/${food.id}`}>
           <img
             src={food.imageUrl}
             className="card-img-top"
@@ -38,7 +38,7 @@ const FoodItem = ({ food }: FoodItemProps) => {
           </div>
         </div>
         <div className="card-footer d-flex justify-content-between bg-light">
-          <Link to={`food/${food.id}`} className="btn btn-primary btn-sm">
+          <Link to={`/food/${food.id}`} className="btn btn-primary btn-sm">
             Ver
           </Link>
           {ctx?.quantities && ctx?.quantities[food.id] > 0 ? (
