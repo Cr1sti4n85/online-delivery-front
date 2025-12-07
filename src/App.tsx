@@ -39,6 +39,7 @@ const App = () => {
       ) : (
         <div className="d-flex flex-column">
           <Menubar />
+          <ToastContainer />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/explore" element={<Explore />} />

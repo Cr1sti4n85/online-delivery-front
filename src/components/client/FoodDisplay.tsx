@@ -11,6 +11,8 @@ type FoodDisplayProps = {
 const FoodDisplay = ({ category, searchText }: FoodDisplayProps) => {
   const foodList = useContext(StoreContext)?.foodList;
 
+  if (!foodList) return null;
+
   //Filter by category
   const filteredFoods = foodList?.filter(
     (food) =>

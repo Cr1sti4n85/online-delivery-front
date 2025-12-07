@@ -1,6 +1,37 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import type { RegisterRequest } from "../../types";
+import { register } from "../../http/apiRequests";
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const [data, setData] = useState<RegisterRequest>({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await register(data);
+      if (response.status === 201) {
+        toast.success("Usuario registrado correctamente. Inicia sesión.");
+        setData({ name: "", email: "", password: "" });
+        navigate("/login");
+      } else {
+        toast.error("Error en el proceso. Inténtalo nuevamente");
+      }
+    } catch {
+      toast.error("Error al registrar usuario");
+    }
+  };
+
   return (
     <div className="register-container">
       <div className="row">
@@ -10,13 +41,17 @@ const Register = () => {
               <h5 className="card-title text-center mb-5 fw-light fs-5">
                 Registro
               </h5>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-floating mb-3">
                   <input
                     type="text"
                     className="form-control"
                     id="floatingName"
                     placeholder="Cristian Gomez"
+                    name="name"
+                    value={data.name}
+                    onChange={handleChange}
+                    required
                   />
                   <label htmlFor="floatingName">Nombre completo</label>
                 </div>
@@ -26,6 +61,10 @@ const Register = () => {
                     className="form-control"
                     id="floatingInput"
                     placeholder="name@example.com"
+                    name="email"
+                    value={data.email}
+                    onChange={handleChange}
+                    required
                   />
                   <label htmlFor="floatingInput">Email</label>
                 </div>
@@ -35,6 +74,10 @@ const Register = () => {
                     className="form-control"
                     id="floatingPassword"
                     placeholder="Password"
+                    name="password"
+                    value={data.password}
+                    onChange={handleChange}
+                    required
                   />
                   <label htmlFor="floatingPassword">Password</label>
                 </div>

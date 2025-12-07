@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 const ListFoods = () => {
   const [list, setList] = useState<FoodResponse[]>([]);
 
-  const removeFood = async (id: number) => {
+  const removeFood = async (id: string) => {
     const res = await deleteFood(id);
     if (res) {
       toast.success("Comida eliminada con éxito");

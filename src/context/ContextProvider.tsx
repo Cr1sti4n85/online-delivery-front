@@ -8,6 +8,7 @@ type StoreContextProviderProps = PropsWithChildren;
 export const StoreContextProvider = (props: StoreContextProviderProps) => {
   const [foodList, setfoodList] = useState<FoodResponse[]>([]);
   const [quantities, setQuantities] = useState<FoodQuantity | null>(null);
+  const [token, setToken] = useState<string>("");
 
   const increaseQty = (foodId: string) => {
     setQuantities(
@@ -40,6 +41,8 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
     decreaseQty,
     quantities,
     removeFromCart,
+    token,
+    setToken,
   };
 
   useEffect(() => {
