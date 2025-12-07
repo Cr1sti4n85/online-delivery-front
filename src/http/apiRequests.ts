@@ -1,5 +1,10 @@
 import API from "../config/apiClient";
-import type { FoodData, FoodResponse, RegisterRequest } from "../types";
+import type {
+  FoodData,
+  FoodResponse,
+  LoginRequest,
+  RegisterRequest,
+} from "../types";
 
 export const addFood = async (data: FoodData, image: File) => {
   const formData = new FormData();
@@ -29,5 +34,10 @@ export const deleteFood = async (id: string) => {
 //Registration and Login
 export const register = async (data: RegisterRequest) => {
   const response = await API.post("/users", data);
+  return response;
+};
+
+export const login = async (data: LoginRequest) => {
+  const response = await API.post("/auth", data);
   return response;
 };
