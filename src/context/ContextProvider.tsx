@@ -50,6 +50,9 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
       try {
         const response = await getFoods();
         setfoodList(response.data);
+        if (localStorage.getItem("jwt")) {
+          setToken(localStorage.getItem("jwt") as string);
+        }
       } catch (error) {
         console.error("Error:", error);
       }

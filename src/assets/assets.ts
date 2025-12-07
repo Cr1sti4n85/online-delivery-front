@@ -7,11 +7,13 @@ import sushiCategory from "./sushi-cat.jpg";
 import dessertCategory from "./dessert-cat.jpg";
 import saladCategory from "./salad-cat.jpg";
 import { FoodCategory } from "../types.d";
+import avatar from "./avatar.png";
 
 export const assets = {
   logo,
   parcel,
   upload,
+  avatar,
 };
 
 export const categories = [

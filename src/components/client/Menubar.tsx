@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router";
 import { assets } from "../../assets/assets";
 import { useContext, useState } from "react";
 import { StoreContext } from "../../context/storeContext";
+import { Dropdown } from "react-bootstrap";
 
 const Menubar = () => {
   const [active, setActive] = useState("home");
@@ -11,6 +12,12 @@ const Menubar = () => {
   const uniqueItemsInCart =
     ctx?.quantities &&
     Object.values(ctx.quantities).filter((item) => item > 0).length;
+
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    ctx?.setToken("");
+    navigate("/");
+  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -85,18 +92,35 @@ const Menubar = () => {
                 </span>
               </div>
             </Link>
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => navigate("/login")}
-            >
-              Login
-            </button>
-            <button
-              className="btn btn-outline-success"
-              onClick={() => navigate("/register")}
-            >
-              Registro
-            </button>
+            {!ctx?.token ? (
+              <>
+                <button
+                  className="btn btn-outline-primary"
+                  onClick={() => navigate("/login")}
+                >
+                  Login
+                </button>
+                <button
+                  className="btn btn-outline-success"
+                  onClick={() => navigate("/register")}
+                >
+                  Registro
+                </button>
+              </>
+            ) : (
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-basic" className="rounded-full">
+                  Opciones
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item onClick={() => navigate("/orders")}>
+                    Órdenes
+                  </Dropdown.Item>
+                  <Dropdown.Item onClick={logout}>Cerrar sesión</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            )}
           </div>
         </div>
       </div>
