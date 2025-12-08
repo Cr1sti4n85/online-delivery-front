@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { StoreContext } from "../../context/storeContext";
 
 const Login = () => {
-  const setToken = useContext(StoreContext)?.setToken;
+  const ctx = useContext(StoreContext);
   const navigate = useNavigate();
   const [data, setData] = useState<LoginRequest>({
     email: "",
@@ -21,11 +21,13 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(data);
-      if (response.status === 200 && setToken) {
+      if (response.status === 200 && ctx) {
         toast.success("Inicio de sesión exitoso");
-        setToken(response.data.token);
+        ctx?.setToken(response.data.token);
+        await ctx?.loadCartItems(response.data.token);
         setData({ email: "", password: "" });
         localStorage.setItem("jwt", response.data.token);
+
         navigate("/");
       } else {
         toast.error("Error en el proceso. Inténtalo nuevamente");

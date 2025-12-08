@@ -41,3 +41,30 @@ export const login = async (data: LoginRequest) => {
   const response = await API.post("/auth", data);
   return response;
 };
+
+//CART
+export const addTocart = async (foodId: string, token: string) => {
+  const response = await API.post(
+    "/cart",
+    { foodId },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+  return response;
+};
+
+export const removeItemFromCart = async (foodId: string, token: string) => {
+  const response = await API.post(
+    "/cart/items",
+    { foodId },
+    { headers: { Authorization: `Bearer ${token}` } }
+  );
+
+  return response;
+};
+
+export const loadItems = async (token: string) => {
+  const response = await API.get("/cart", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};

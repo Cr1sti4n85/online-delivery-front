@@ -1,5 +1,10 @@
 import { useEffect, useState, type PropsWithChildren } from "react";
-import { getFoods } from "../http/apiRequests";
+import {
+  addTocart,
+  getFoods,
+  loadItems,
+  removeItemFromCart,
+} from "../http/apiRequests";
 import type { FoodQuantity, FoodResponse } from "../types";
 import { StoreContext } from "./storeContext";
 
@@ -10,7 +15,7 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
   const [quantities, setQuantities] = useState<FoodQuantity | null>(null);
   const [token, setToken] = useState<string>("");
 
-  const increaseQty = (foodId: string) => {
+  const increaseQty = async (foodId: string) => {
     setQuantities(
       (prev) => ({
         ...prev,
@@ -18,13 +23,15 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
       })
       //con corchetes foodId toma el valor de la variable como clave
     );
+    await addTocart(foodId, token);
   };
 
-  const decreaseQty = (foodId: string) => {
+  const decreaseQty = async (foodId: string) => {
     setQuantities(
       (prev) =>
         prev && { ...prev, [foodId]: prev[foodId] > 0 ? prev[foodId] - 1 : 0 }
     );
+    await removeItemFromCart(foodId, token);
   };
 
   const removeFromCart = (foodId: string) => {
@@ -35,14 +42,21 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
     });
   };
 
+  const loadCartItems = async (token: string) => {
+    const res = await loadItems(token);
+    setQuantities(res.data.items);
+  };
+
   const contextValue = {
     foodList,
     increaseQty,
     decreaseQty,
     quantities,
+    setQuantities,
     removeFromCart,
     token,
     setToken,
+    loadCartItems,
   };
 
   useEffect(() => {
@@ -52,6 +66,7 @@ export const StoreContextProvider = (props: StoreContextProviderProps) => {
         setfoodList(response.data);
         if (localStorage.getItem("jwt")) {
           setToken(localStorage.getItem("jwt") as string);
+          await loadCartItems(localStorage.getItem("jwt") as string);
         }
       } catch (error) {
         console.error("Error:", error);

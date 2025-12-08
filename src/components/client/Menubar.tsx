@@ -16,6 +16,7 @@ const Menubar = () => {
   const logout = () => {
     localStorage.removeItem("jwt");
     ctx?.setToken("");
+    ctx?.setQuantities({});
     navigate("/");
   };
 
