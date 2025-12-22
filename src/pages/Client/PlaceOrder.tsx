@@ -1,11 +1,64 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { assets } from "../../assets/assets";
 import { StoreContext } from "../../context/storeContext";
-import type { FoodResponse } from "../../types";
+import type { FoodResponse, UserInfo } from "../../types";
 import { calculateCartCosts } from "../../util/cartUtils";
+import { placeOrder } from "../../http/apiRequests";
+import { toast } from "react-toastify";
 
 const PlaceOrder = () => {
   const ctx = useContext(StoreContext);
+  const [userInfo, setUserInfo] = useState<UserInfo>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    userAddress: "",
+    country: "Chile",
+    city: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const orderData = {
+      userAddress: `${userInfo.firstName} ${userInfo.lastName}, ${userInfo.userAddress}, ${userInfo.city}, ${userInfo.country}`,
+      email: userInfo.email,
+      phoneNumber: userInfo.phoneNumber,
+      orderedItems: cartItems.map((item) => ({
+        foodId: item.id,
+        name: item.name,
+        quantity: ctx?.quantities ? ctx.quantities[item.id] : 0,
+        price: item.price * (ctx?.quantities ? ctx.quantities[item.id] : 0),
+        category: item.category,
+        description: item.description,
+        imageUrl: item.imageUrl,
+      })),
+      amount: total,
+      orderStatus: "Preparing",
+    };
+
+    try {
+      const response = await placeOrder(orderData, ctx!.token);
+      if (response.status === 201) {
+        toast.success("Pedido realizado con éxito");
+        //inititate payment
+        console.log(response.data);
+      }
+    } catch {
+      toast.error("Error al realizar pedido. Intenta nuevamente");
+    }
+  };
 
   if (!ctx) return null;
 
@@ -38,7 +91,10 @@ const PlaceOrder = () => {
             </h4>
             <ul className="list-group mb-3">
               {cartItems.map((item) => (
-                <li className="list-group-item d-flex justify-content-between lh-sm">
+                <li
+                  key={item.id}
+                  className="list-group-item d-flex justify-content-between lh-sm"
+                >
                   <div>
                     <h6 className="my-0">{item.name}</h6>
                     <small className="text-body-secondary">
@@ -70,7 +126,7 @@ const PlaceOrder = () => {
           </div>
           <div className="col-md-7 col-lg-8">
             <h4 className="mb-3">Dirección de facturación</h4>
-            <form className="needs-validation" noValidate>
+            <form className="needs-validation" onSubmit={handleSubmit}>
               <div className="row g-3">
                 <div className="col-sm-6">
                   <label htmlFor="firstName" className="form-label">
@@ -81,7 +137,9 @@ const PlaceOrder = () => {
                     className="form-control"
                     id="firstName"
                     placeholder="Pedro"
-                    value=""
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.firstName}
+                    name="firstName"
                     required
                   />
                 </div>
@@ -94,7 +152,9 @@ const PlaceOrder = () => {
                     className="form-control"
                     id="lastName"
                     placeholder="Rodríguez"
-                    value=""
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.lastName}
+                    name="lastName"
                     required
                   />
                 </div>
@@ -109,6 +169,9 @@ const PlaceOrder = () => {
                       className="form-control"
                       id="email"
                       placeholder="Email"
+                      onChange={(e) => handleChange(e)}
+                      value={userInfo.email}
+                      name="email"
                       required
                     />
                   </div>
@@ -119,10 +182,13 @@ const PlaceOrder = () => {
                     Teléfono
                   </label>
                   <input
-                    type="tel"
+                    type="text"
                     className="form-control"
                     id="phone"
                     placeholder="56912345678"
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.phoneNumber}
+                    name="phone"
                     required
                   />
                 </div>
@@ -135,6 +201,9 @@ const PlaceOrder = () => {
                     className="form-control"
                     id="address"
                     placeholder="Calle abc 123"
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.userAddress}
+                    name="address"
                     required
                   />
                 </div>
@@ -146,18 +215,27 @@ const PlaceOrder = () => {
                     className="form-select"
                     id="country"
                     required
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.country}
+                    name="country"
                     disabled
                   >
                     <option value={"Chile"}>Chile</option>
-                    <option>United States</option>
                   </select>
                 </div>
                 <div className="col-md-4">
                   <label htmlFor="state" className="form-label">
                     Ciudad
                   </label>
-                  <select className="form-select" id="state" required>
-                    <option value={""}>Escoge tu región</option>
+                  <select
+                    className="form-select"
+                    id="state"
+                    required
+                    onChange={(e) => handleChange(e)}
+                    value={userInfo.city}
+                    name="city"
+                  >
+                    <option value={""}>Escoge tu ciudad</option>
                     <option>Santiago</option>
                     <option>Valparaíso</option>
                     <option>Viña del Mar</option>

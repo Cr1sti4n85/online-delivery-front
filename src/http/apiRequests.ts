@@ -3,6 +3,7 @@ import type {
   FoodData,
   FoodResponse,
   LoginRequest,
+  OrderRequest,
   RegisterRequest,
 } from "../types";
 
@@ -64,6 +65,14 @@ export const removeItemFromCart = async (foodId: string, token: string) => {
 
 export const loadItems = async (token: string) => {
   const response = await API.get("/cart", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};
+
+//ORDERS
+export const placeOrder = async (orderData: OrderRequest, token: string) => {
+  const response = await API.post("/orders", orderData, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response;

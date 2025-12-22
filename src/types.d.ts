@@ -38,3 +38,33 @@ export type LoginRequest = {
   email: string;
   password: string;
 };
+
+export type UserInfo = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  userAddress: string;
+  city: string;
+  country: string;
+};
+
+//ORDERS
+export type OrderRequest = {
+  userAddress: string;
+  email: string;
+  phoneNumber: string;
+  orderedItems: OrderedItem[];
+  amount: number;
+  orderStatus: string;
+};
+
+export type OrderedItem = {
+  foodId: string;
+  name: string;
+  price: number;
+  category: string;
+  description: string;
+  imageUrl: string;
+  quantity: number;
+};
