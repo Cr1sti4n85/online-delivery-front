@@ -70,10 +70,24 @@ export const loadItems = async (token: string) => {
   return response;
 };
 
+export const deleteCart = async (token: string) => {
+  const response = await API.delete("/cart", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.status === 204;
+};
+
 //ORDERS
 export const placeOrder = async (orderData: OrderRequest, token: string) => {
   const response = await API.post("/orders", orderData, {
     headers: { Authorization: `Bearer ${token}` },
   });
   return response;
+};
+
+export const deleteOrder = async (orderId: string, token: string) => {
+  const response = await API.delete(`/orders/${orderId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.status === 204;
 };

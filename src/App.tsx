@@ -14,6 +14,7 @@ import Cart from "./pages/Client/Cart";
 import PlaceOrder from "./pages/Client/PlaceOrder";
 import Login from "./pages/Client/Login";
 import Register from "./pages/Client/Register";
+import Success from "./pages/Client/Success";
 
 const App = () => {
   const isAdmin = false;
@@ -49,6 +50,7 @@ const App = () => {
             <Route path="/order" element={<PlaceOrder />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/payment/success" element={<Success />} />
           </Routes>
         </div>
       )}

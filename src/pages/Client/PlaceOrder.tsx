@@ -5,9 +5,11 @@ import type { FoodResponse, UserInfo } from "../../types";
 import { calculateCartCosts } from "../../util/cartUtils";
 import { placeOrder } from "../../http/apiRequests";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const PlaceOrder = () => {
   const ctx = useContext(StoreContext);
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState<UserInfo>({
     firstName: "",
     lastName: "",
@@ -51,9 +53,9 @@ const PlaceOrder = () => {
     try {
       const response = await placeOrder(orderData, ctx!.token);
       if (response.status === 201) {
-        toast.success("Pedido realizado con éxito");
+        toast.success("Redirigiendo a pasarela de pago...");
         //inititate payment
-        console.log(response.data);
+        navigate(response.data.paymentUrl);
       }
     } catch {
       toast.error("Error al realizar pedido. Intenta nuevamente");
@@ -188,7 +190,7 @@ const PlaceOrder = () => {
                     placeholder="56912345678"
                     onChange={(e) => handleChange(e)}
                     value={userInfo.phoneNumber}
-                    name="phone"
+                    name="phoneNumber"
                     required
                   />
                 </div>
@@ -203,7 +205,7 @@ const PlaceOrder = () => {
                     placeholder="Calle abc 123"
                     onChange={(e) => handleChange(e)}
                     value={userInfo.userAddress}
-                    name="address"
+                    name="userAddress"
                     required
                   />
                 </div>
