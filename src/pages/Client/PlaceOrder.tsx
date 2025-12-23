@@ -1,15 +1,17 @@
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import { useContext, useState } from "react";
+import { toast } from "react-toastify";
+import { placeOrder } from "../../http/apiRequests";
 import { assets } from "../../assets/assets";
-import { StoreContext } from "../../context/storeContext";
 import type { FoodResponse, UserInfo } from "../../types";
 import { calculateCartCosts } from "../../util/cartUtils";
-import { placeOrder } from "../../http/apiRequests";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router";
+import { StoreContext } from "../../context/storeContext";
+
+initMercadoPago(import.meta.env.VITE_MP_PUBLIC_KEY);
 
 const PlaceOrder = () => {
   const ctx = useContext(StoreContext);
-  const navigate = useNavigate();
+  const [preferenceId, setPreferenceId] = useState("");
   const [userInfo, setUserInfo] = useState<UserInfo>({
     firstName: "",
     lastName: "",
@@ -53,9 +55,7 @@ const PlaceOrder = () => {
     try {
       const response = await placeOrder(orderData, ctx!.token);
       if (response.status === 201) {
-        toast.success("Redirigiendo a pasarela de pago...");
-        //inititate payment
-        navigate(response.data.paymentUrl);
+        setPreferenceId(response.data.order.preferenceId);
       }
     } catch {
       toast.error("Error al realizar pedido. Intenta nuevamente");
@@ -251,8 +251,13 @@ const PlaceOrder = () => {
                 type="submit"
                 disabled={cartItems.length === 0}
               >
-                Continuar checkout
+                Aceptar
               </button>
+              {preferenceId && (
+                <div>
+                  <Wallet initialization={{ preferenceId }} />
+                </div>
+              )}
             </form>
           </div>
         </div>

@@ -15,6 +15,7 @@ import PlaceOrder from "./pages/Client/PlaceOrder";
 import Login from "./pages/Client/Login";
 import Register from "./pages/Client/Register";
 import Success from "./pages/Client/Success";
+import MyOrders from "./pages/Client/MyOrders";
 
 const App = () => {
   const isAdmin = false;
@@ -51,6 +52,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/payment/success" element={<Success />} />
+            <Route path="/my-orders" element={<MyOrders />} />
           </Routes>
         </div>
       )}

@@ -115,7 +115,7 @@ const Menubar = () => {
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                  <Dropdown.Item onClick={() => navigate("/orders")}>
+                  <Dropdown.Item onClick={() => navigate("/my-orders")}>
                     Órdenes
                   </Dropdown.Item>
                   <Dropdown.Item onClick={logout}>Cerrar sesión</Dropdown.Item>

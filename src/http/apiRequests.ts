@@ -91,3 +91,10 @@ export const deleteOrder = async (orderId: string, token: string) => {
   });
   return response.status === 204;
 };
+
+export const getOrders = async (token: string) => {
+  const response = await API.get("/orders", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response;
+};

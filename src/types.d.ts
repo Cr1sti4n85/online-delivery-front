@@ -68,3 +68,14 @@ export type OrderedItem = {
   imageUrl: string;
   quantity: number;
 };
+
+export type OrderResponse = {
+  id: string;
+  userAddress: string;
+  email: string;
+  phoneNumber: string;
+  orderedItems: OrderedItem[];
+  amount: number;
+  orderStatus: string;
+  userId: string;
+};
