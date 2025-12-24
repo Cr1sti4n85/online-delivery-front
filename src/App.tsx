@@ -16,9 +16,12 @@ import Login from "./pages/Client/Login";
 import Register from "./pages/Client/Register";
 import Success from "./pages/Client/Success";
 import MyOrders from "./pages/Client/MyOrders";
+import { useContext } from "react";
+import { StoreContext } from "./context/storeContext";
 
 const App = () => {
-  const isAdmin = true;
+  const token = useContext(StoreContext)?.token;
+  const isAdmin = false;
 
   return (
     <>
@@ -48,11 +51,14 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/food/:id" element={<FoodDetails />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/order" element={<PlaceOrder />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/order" element={token ? <PlaceOrder /> : <Login />} />
+            <Route path="/login" element={token ? <Home /> : <Login />} />
+            <Route path="/register" element={token ? <Home /> : <Register />} />
             <Route path="/payment/success" element={<Success />} />
-            <Route path="/my-orders" element={<MyOrders />} />
+            <Route
+              path="/my-orders"
+              element={token ? <MyOrders /> : <Login />}
+            />
           </Routes>
         </div>
       )}

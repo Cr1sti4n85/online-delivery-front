@@ -32,7 +32,7 @@ const MyOrders = () => {
             <tbody>
               {data.map((order, idx) => (
                 <tr key={idx}>
-                  <td>
+                  <td className="align-middle">
                     <img
                       src={assets.parcel}
                       alt="delivery image"
@@ -40,7 +40,7 @@ const MyOrders = () => {
                       width={48}
                     />
                   </td>
-                  <td>
+                  <td className="align-middle">
                     {order.orderedItems.map((item, idx) => {
                       if (idx === order.orderedItems.length - 1) {
                         return `${item.name} x ${item.quantity}`;
@@ -49,12 +49,14 @@ const MyOrders = () => {
                       }
                     })}
                   </td>
-                  <td>${order.amount}</td>
-                  <td>Items: {order.orderedItems.length}</td>
-                  <td className="fw-bold text-capitalize">
+                  <td className="align-middle">${order.amount}</td>
+                  <td className="align-middle">
+                    Items: {order.orderedItems.length}
+                  </td>
+                  <td className="fw-bold text-capitalize align-middle">
                     &#x25cf;{order.orderStatus}
                   </td>
-                  <td>
+                  <td className="align-middle">
                     <button
                       className="btn btn-sm btn-warning"
                       //   onClick={fetchOrders}
