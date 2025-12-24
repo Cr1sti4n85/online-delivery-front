@@ -98,3 +98,15 @@ export const getOrders = async (token: string) => {
   });
   return response;
 };
+
+export const getAllOrders = async () => {
+  const response = await API.get("/orders/all");
+  return response;
+};
+
+export const updateOrderStatus = async (orderId: string, status: string) => {
+  const response = await API.patch(
+    `/orders/status/${orderId}?status=${status}`
+  );
+  return response;
+};

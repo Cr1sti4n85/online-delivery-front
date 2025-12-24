@@ -18,7 +18,7 @@ import Success from "./pages/Client/Success";
 import MyOrders from "./pages/Client/MyOrders";
 
 const App = () => {
-  const isAdmin = false;
+  const isAdmin = true;
 
   return (
     <>
