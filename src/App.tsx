@@ -1,10 +1,12 @@
 import { Route, Routes, useLocation } from "react-router";
+import { ToastContainer } from "react-toastify";
+import { useContext } from "react";
+import { StoreContext } from "./context/storeContext";
 import AddFood from "./pages/Admin/AddFood";
 import ListFoods from "./pages/Admin/ListFoods";
 import Orders from "./pages/Admin/Orders";
 import AdminMenubar from "./components/admin/AdminMenubar";
 import Sidebar from "./components/admin/Sidebar";
-import { ToastContainer } from "react-toastify";
 import Menubar from "./components/client/Menubar";
 import Home from "./pages/Client/Home";
 import Explore from "./pages/Client/Explore";
@@ -16,8 +18,7 @@ import Login from "./pages/Client/Login";
 import Register from "./pages/Client/Register";
 import Success from "./pages/Client/Success";
 import MyOrders from "./pages/Client/MyOrders";
-import { useContext } from "react";
-import { StoreContext } from "./context/storeContext";
+import AdminLogin from "./pages/Admin/AdminLogin";
 
 const App = () => {
   const token = useContext(StoreContext)?.token;
@@ -37,7 +38,7 @@ const App = () => {
                 <Route path="/admin/add" element={<AddFood />} />
                 <Route path="/admin/list" element={<ListFoods />} />
                 <Route path="/admin/orders" element={<Orders />} />
-                <Route path="/admin" element={<ListFoods />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
               </Routes>
             </div>
           </div>
