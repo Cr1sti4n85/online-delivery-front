@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getAllOrders, updateOrderStatus } from "../http/apiRequests";
-import { assets } from "../assets/assets";
-import type { OrderResponse } from "../types.d";
+import { getAllOrders, updateOrderStatus } from "../../http/apiRequests";
+import { assets } from "../../assets/assets";
+import type { OrderResponse } from "../../types.d";
 
 const Orders = () => {
   const [data, setData] = useState<OrderResponse[]>([]);

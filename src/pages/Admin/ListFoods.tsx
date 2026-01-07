@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { deleteFood, getFoods } from "../http/apiRequests";
-import type { FoodResponse } from "../types";
+import { deleteFood, getFoods } from "../../http/apiRequests";
+import type { FoodResponse } from "../../types.d";
 import { toast } from "react-toastify";
 
 const ListFoods = () => {

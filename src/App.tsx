@@ -1,7 +1,7 @@
-import { Route, Routes } from "react-router";
-import AddFood from "./pages/AddFood";
-import ListFoods from "./pages/ListFoods";
-import Orders from "./pages/Orders";
+import { Route, Routes, useLocation } from "react-router";
+import AddFood from "./pages/Admin/AddFood";
+import ListFoods from "./pages/Admin/ListFoods";
+import Orders from "./pages/Admin/Orders";
 import AdminMenubar from "./components/admin/AdminMenubar";
 import Sidebar from "./components/admin/Sidebar";
 import { ToastContainer } from "react-toastify";
@@ -21,11 +21,12 @@ import { StoreContext } from "./context/storeContext";
 
 const App = () => {
   const token = useContext(StoreContext)?.token;
-  const isAdmin = false;
+  const location = useLocation();
+  const path = location.pathname;
 
   return (
     <>
-      {isAdmin ? (
+      {path.startsWith("/admin") ? (
         <div className="d-flex" id="wrapper">
           <Sidebar />
           <div id="page-content-wrapper">
@@ -36,7 +37,7 @@ const App = () => {
                 <Route path="/admin/add" element={<AddFood />} />
                 <Route path="/admin/list" element={<ListFoods />} />
                 <Route path="/admin/orders" element={<Orders />} />
-                <Route path="/" element={<ListFoods />} />
+                <Route path="/admin" element={<ListFoods />} />
               </Routes>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { assets } from "../assets/assets";
-import type { FoodData } from "../types";
-import { addFood } from "../http/apiRequests";
+import { assets } from "../../assets/assets";
+import type { FoodData } from "../../types.d";
+import { addFood } from "../../http/apiRequests";
 import { toast } from "react-toastify";
 
 const AddFood = () => {
